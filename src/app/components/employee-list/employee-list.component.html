@@ -1,0 +1,82 @@
+<div class="container mt-4">
+  <h2 class="mb-3">Employee List</h2>
+
+  <div class="mb-3">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="Search by name or department"
+      class="form-control"
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="sortBy" class="form-label">Sort By:</label>
+    <select [(ngModel)]="sortBy" id="sortBy" class="form-select">
+      <option value="name">Name</option>
+      <option value="department">Department</option>
+    </select>
+  </div>
+
+  <button (click)="resetData()" class="btn btn-secondary m-1">
+    Reset Data
+  </button>
+
+  <button type="button" class="btn btn-primary" (click)="open(content)">
+    Add New Employee
+  </button>
+
+  <ul class="list-group mt-3">
+    <li
+      *ngFor="let employee of filteredEmployees"
+      class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+    >
+      {{ employee.name }} - {{ employee.position }} ({{ employee.department }})
+      <div>
+        <button
+          (click)="openDetails(employee)"
+          class="btn btn-info btn-sm me-2"
+        >
+          Details
+        </button>
+        <button
+          (click)="editEmployee(employee)"
+          class="btn btn-warning btn-sm me-2"
+        >
+          Edit
+        </button>
+        <button
+          (click)="deleteEmployee(employee.id)"
+          class="btn btn-danger btn-sm"
+        >
+          Delete
+        </button>
+      </div>
+    </li>
+  </ul>
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">
+        {{ selectedEmployee ? "Edit Employee" : "Add New Employee" }}
+      </h4>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="modal.dismiss()"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <app-employee-form
+        [employee]="selectedEmployee"
+        (save)="saveEmployee($event)"
+      >
+      </app-employee-form>
+    </div>
+  </ng-template>
+</div>
+
+<ng-template #detailsModal let-modal>
+  <app-employee-details [employee]="selectedEmployee"></app-employee-details>
+</ng-template>

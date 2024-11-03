@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  <form [formGroup]="employeeForm" (ngSubmit)="submit()">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name:</label>
+      <input formControlName="name" id="name" class="form-control" required />
+      <div *ngIf="employeeForm.get('name')?.invalid && employeeForm.get('name')?.touched" class="text-danger">
+        Name is required.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="position" class="form-label">Position:</label>
+      <input formControlName="position" id="position" class="form-control" required />
+      <div *ngIf="employeeForm.get('position')?.invalid && employeeForm.get('position')?.touched" class="text-danger">
+        Position is required.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="department" class="form-label">Department:</label>
+      <input formControlName="department" id="department" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email:</label>
+      <input formControlName="email" id="email" class="form-control" />
+      <div *ngIf="employeeForm.get('email')?.invalid && employeeForm.get('email')?.touched" class="text-danger">
+        Please enter a valid email.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="performanceRating" class="form-label">Performance Rating:</label>
+      <input type="number" formControlName="performanceRating" id="performanceRating" class="form-control" min="1" max="5" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>
