@@ -16,7 +16,10 @@ export interface Employee {
 export class EmployeeService {
   private localStorageKey = 'employees';
   private mockData: Employee[] = [
+    { id: 1, name: 'John Doe', position: 'Developer',email:"test@gmail.com", department: 'IT', performanceRating: 4, performanceHistory: [3, 4, 5] },
+    { id: 2, name: 'Jane Smith', position: 'Manager',email:"test1@gmail.com", department: 'HR', performanceRating: 5, performanceHistory: [4, 5, 5] },
   ];
+
 
   constructor() {
     if (!localStorage.getItem(this.localStorageKey)) {
